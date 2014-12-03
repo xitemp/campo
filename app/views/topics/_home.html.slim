@@ -1,0 +1,14 @@
+- cache [topic, locale] do
+  .list-group-item.topic
+    a.list-group-item-avatar href=topic.user.bio
+      img.img-rounded alt="avatar" src=topic.user.avatar.big.url
+    a.list-group-item-content href=topic_last_path(topic)
+      .list-group-item-heading
+        b = topic.title
+      .text-muted
+        = topic.user.name
+        = ' · '
+        = time_ago_tag topic.created_at
+        - if topic.category
+          = ' · '
+          = topic.category.name

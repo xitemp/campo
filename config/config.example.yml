@@ -1,5 +1,5 @@
 default: &default
-  title: Campo
+  title: 不安装
   host: localhost:3000
 
   mailer:

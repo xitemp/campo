@@ -1,9 +1,10 @@
 - @page_title = @topic.title
-
-.main
+a.btn.btn-default href="javascript:history.go(-1);"
+  = t '.back'
+.main.nopadding
   .container
     .row
-      .col-md-9
+      .col-md-9.nopadding
         .panel
           .panel-heading
             h1.panel-title = @topic.title
@@ -11,17 +12,16 @@
             - cache [@topic, locale] do
               .list-group.list-group-campo
                 .list-group-item.comment data-creator-id=@topic.user_id
-                  a.list-group-item-avatar href=user_link(@topic.user)
+                  a.list-group-item-avatar
                     img.img-rounded alt="avatar" src=@topic.user.avatar.normal.url
                   .list-group-item-content
                     .list-group-item-heading
-                      a.comment-user href=user_link(@topic.user)
+                      a.comment-user
                         b = @topic.user.name
                         '
                         = "@#{@topic.user.username}"
                       = ' · '
-                      a href=topic_path(@topic)
-                        = time_ago_tag @topic.created_at
+                      = time_ago_tag @topic.created_at
                       - if @topic.category
                         = ' · '
                         a href=categoried_topics_path(category_id: @topic.category.slug)
@@ -52,10 +52,6 @@
               - else
                 li.list-group-item.text-center.text-muted.empty-message
                   = t '.no_comment_yet'
-          - if @comments.total_pages > 1
-            .panel-footer.clearfix
-              .pull-right
-                = paginate @comments, theme: 'campo', params: { anchor: 'comments' }
 
         .panel
           .panel-body
@@ -63,11 +59,9 @@
               - unless current_user.locked?
                 .list-group.list-group-campo
                   .list-group-item.comment
-                    a.list-group-item-avatar href=user_link(current_user)
-                      img.img-rounded alt="avatar" src=current_user.avatar.normal.url
                     .list-group-item-content
                       .list-group-item-heading
-                        a.comment-user href=user_link(current_user)
+                        a.comment-user
                           b = current_user.name
                           '
                           = "@#{current_user.username}"
@@ -88,12 +82,7 @@
               '
               = t '.to_comment'
 
-      .col-md-3
-        - if login?
-          .panel
-            .panel-body
-              = render 'subscriptions/subscription', subscribable: @topic
-
+      .col-md-3.nopadding
         .panel
           .panel-heading
             h4.panel-title

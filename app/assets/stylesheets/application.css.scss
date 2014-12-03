@@ -24,3 +24,8 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.nopadding {
+  padding: 0 !important;
+  margin: 0 !important;
+}

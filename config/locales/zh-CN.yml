@@ -21,7 +21,7 @@ zh-CN:
         created_at: "创建于"
         email: Email
         locale: "语言"
-        name: "全名"
+        name: "昵称"
         password: "密码"
         password_confirmation: "密码确认"
         username: "用户名"
@@ -136,6 +136,10 @@ zh-CN:
       sign_in: "登录"
       sign_up: "注册"
       topics: "话题"
+      usual: "常用"
+      recommendation: "新推"
+      categories: "分类"
+      about: "关于"
   locales:
     en: "英文"
     zh-CN: "简体中文"
@@ -257,6 +261,14 @@ zh-CN:
       newest: "最新"
       newest_topics: "最新话题"
       no_topic_yet: "还没有话题"
+    home:
+      all_categories: "所有分类"
+      create_topic: "创建话题"
+      hot: "热门"
+      hot_topics: "热门话题"
+      newest: "最新"
+      newest_topics: "最新话题"
+      no_topic_yet: "还没有话题"
     new:
       new_topic: "新话题"
     search:
@@ -274,6 +286,7 @@ zh-CN:
       sign_up: "注册"
       to_comment: "后发表评论"
       your_account_had_been_locked: "你的帐号已被锁定"
+      back: "返回"
     topic:
       comments_count: "%{count} 条评论"
   user_mailer:
@@ -322,7 +335,7 @@ zh-CN:
       pick_a_username: "挑一个用户名"
       sign_up: "注册"
       your_email: "你的邮箱地址"
-      your_full_name: "你的全名"
+      your_full_name: "你的昵称"
     passwords:
       edit:
         password_reset: "密码重置"

@@ -1,0 +1,19 @@
+- case params[:tab]
+- when 'hot'
+  - @page_title = t('.hot_topics')
+- when 'newest'
+  - @page_title = t('.newest_topics')
+
+.main
+  .container
+    .row
+      .col-md-9.nopadding
+        .panel
+          .panel-body
+            .list-group.list-group-campo.recordable
+              = render partial: 'home', collection: @topics, as: :topic
+          - if @topics.total_pages > 1
+            .panel-footer.clearfix
+              .pull-right
+                = paginate @topics, theme: 'campo'
+

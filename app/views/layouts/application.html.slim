@@ -7,7 +7,13 @@ html
     = javascript_include_tag "application", "data-turbolinks-track" => true
     - if I18n.locale != 'en'
       = javascript_include_tag "locales/#{I18n.locale}"
-    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    link href="touch-icon-iphone.png" rel="apple-touch-icon"
+    link href="touch-icon-ipad.png" rel="apple-touch-icon" sizes="72x72"
+    link href="touch-icon-iphone-retina.png" rel="apple-touch-icon" sizes="114x114"
+    link href="touch-icon-ipad-retina.png" rel="apple-touch-icon" sizes="144x144"
+    meta name="apple-mobile-web-app-capable" content="yes"
+    meta name="viewport" content="width=device-width, minimal-ui, initial-scale=1.0, user-scalable=no"
+    meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"
     = csrf_meta_tags
     - if login?
       javascript:
@@ -19,43 +25,19 @@ html
     nav.navbar.navbar-static-top
       .container
         .navbar-header
+          - if login?
+            a.navbar-brand href=likes_user_topics_path(username: current_user.username)
+              img.img-circle.img-avatar src=current_user.avatar.normal.url
+              = t '.usual'
           a.navbar-brand href=root_path
-            = CONFIG['title']
+            = t '.recommendation'
+          a.navbar-brand href=topics_path
+            = t '.categories'
         ul.nav.navbar-nav.navbar-right
           - if login?
-            li class=('active' if request.original_fullpath =~ /^\/notifications/)
-              a.notifications-bell href=notifications_path
-                i.fa.fa-bell-o
-                - if unread_notifications_count > 0
-                  .badge = unread_notifications_count > 99 ? '99+' : unread_notifications_count
-            li.dropdown
-              a.dropdown-toggle data-toggle="dropdown" href='#'
-                img.img-circle.img-avatar src=current_user.avatar.normal.url
-                '
-                = current_user.name
-                '
-                i.fa.fa-caret-down
-              ul.dropdown-menu.dropdown-menu-right
-                li
-                  a href=user_root_path(username: current_user.username)
-                    = t '.profile'
-                li.divider
-                li.dropdown-header
-                  = t '.likes'
-                li
-                  a href=likes_user_topics_path(username: current_user.username)
-                    = t '.topics'
-                li
-                  a href=likes_user_comments_path(username: current_user.username)
-                    = t '.comments'
-                li.divider
-                li
-                  a href=settings_account_path
-                    = t '.settings'
-                li.divider
-                li
-                  a href=logout_path data-method="delete"
-                    = t '.logout'
+            li
+              a href=settings_account_path
+                = t '.about'
           - else
             li
               a href=signup_path(return_to: params[:return_to] || return_to_path(request.fullpath))
@@ -63,15 +45,5 @@ html
             li
               a href=login_path(return_to: params[:return_to] || return_to_path(request.fullpath))
                 = t '.sign_in'
-          li.navbar-toggle
-            a.tiem type="button" data-toggle="collapse" data-target="#navbar"
-              i.fa.fa-bars
-        #navbar.collapse.navbar-collapse
-          ul.nav.navbar-nav
-            li class=('active' if request.original_fullpath =~ /^\/topics/)
-              a href=topics_path
-                = t '.community'
 
-    - if login? and !current_user.confirmed?
-      = render 'share/user_confirm_required'
     = yield

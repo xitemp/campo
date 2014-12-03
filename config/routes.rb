@@ -66,7 +66,7 @@ Rails.application.routes.draw do
 
   resources :attachments, only: [:create]
 
-  root 'topics#index'
+  root 'topics#home'
 
   scope path: '~:username', module: 'users', as: 'user' do
     resources :topics, only: [:index] do

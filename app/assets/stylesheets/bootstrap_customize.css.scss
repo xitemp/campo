@@ -281,11 +281,13 @@ body {
   }
 
   .list-group-item-avatar {
-    float: left;
+    float: right;
+    margin-top: -$padding-base-vertical*1.5;
+    margin-right: -$padding-base-horizontal*0.5;
   }
 
   .list-group-item-avatar + .list-group-item-content {
-    margin-left: 60px;
+    margin-left: 0;
   }
 
   .list-group-item-actions {
@@ -398,4 +400,10 @@ article {
 .middle-block-inner {
   display: table-cell;
   vertical-align: middle;
+}
+
+.img-logo {
+  margin-right: $padding-base-horizontal;
+  margin-bottom: $padding-base-vertical;
+  margin-left: $padding-base-horizontal;
 }

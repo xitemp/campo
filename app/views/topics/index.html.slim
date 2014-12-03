@@ -10,7 +10,19 @@
 .main
   .container
     .row
-      .col-md-9
+      .col-md-3.nopadding
+        = render 'search_form'
+        .panel.nopadding
+          .panel-body
+            ul.nav.nav-pills
+              li class=('active' unless @category)
+                a href=topics_path
+                  = t '.all_categories'
+              - Category.order(topics_count: :desc).each do |category|
+                li class=('active' if category == @category)
+                  a href=categoried_topics_path(category_id: category.slug)
+                    = category.name
+      .col-md-9.nopadding
         .panel
           .panel-heading.clearfix
             .pull-right
@@ -31,7 +43,7 @@
           .panel-body
             .list-group.list-group-campo.recordable
               - if @topics.any?
-                = render @topics
+                = render partial: 'home', collection: @topics, as: :topic
               - else
                 .list-group-item.text-center.text-muted.empty-message
                   = t '.no_topic_yet'
@@ -40,19 +52,3 @@
               .pull-right
                 = paginate @topics, theme: 'campo'
 
-      .col-md-3
-        = render 'search_form'
-        .panel
-          .panel-body
-            a.btn.btn-success.btn-block href=new_topic_path(category_id: @category.try(:slug))
-              = t '.create_topic'
-        .panel
-          .panel-body
-            ul.nav.nav-pills.nav-stacked
-              li class=('active' unless @category)
-                a href=topics_path
-                  = t '.all_categories'
-              - Category.order(topics_count: :desc).each do |category|
-                li class=('active' if category == @category)
-                  a href=categoried_topics_path(category_id: category.slug)
-                    = category.name
