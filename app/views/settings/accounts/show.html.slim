@@ -14,7 +14,7 @@
         p 感谢使用&支持
         br
         p 联系我们：<a href="mailto:xizhixi@gmail.com">邮件</a>
-        /.panel
+        .panel
           .panel-heading
             h3.panel-title
               = t '.account'
@@ -41,6 +41,8 @@
               .form-group
                 .col-sm-6.col-sm-push-3
                   = f.submit t('.save_changes'), class: 'btn btn-primary', tabIndex: 5
+            a.btn.btn-warning href=logout_path data-method="delete"
+              = t '.logout'      
 
 javascript:
   $('form.user-form').validate({
