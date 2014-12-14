@@ -15,9 +15,9 @@ class Topic < ActiveRecord::Base
   after_touch :update_hot
 
   def calculate_hot
-    order = Math.log10([likes_count, 1].max)
+    #order = Math.log10([likes_count, 1].max)
     #order + created_at.to_f / 45000
-    order / 45000
+    Math.log10([likes_count, 1].max)
   end
 
   def update_hot
